@@ -113,20 +113,17 @@ jQuery(function($) {
 
   function onSubmit(e) {
     $form = $(e.target);
+    $form.attr("action", ApiTaster.getSubmitUrl($form));
+
+
     ApiTaster.disableSubmitButton();
     ApiTaster.disableUrlParams();
 
-    window.ajax = $.ajax({
-      url: ApiTaster.getSubmitUrl($form),
-      type: $form.attr('method'),
-      data: $form.serialize(),
-      dataType: 'xml'
-    }).complete(onComplete);
-
+    $form.bind('ajax:complete', function(xhr, status) {
+      onComplete(status, xhr);
+    });
     ApiTaster.lastRequest = {};
     ApiTaster.lastRequest.startTime = Date.now();
-
-    return false;
   }
 
   function onComplete(xhr, status) {
@@ -134,7 +131,7 @@ jQuery(function($) {
     ApiTaster.enableSubmitButton();
     ApiTaster.enableUrlParams();
 
-    if ($("#show-api-response-div:visible").length == 0) {
+    if ($("#show-api-response-div:visible").length === 0) {
       $("#show-api-response-div").slideDown(100);
     }
 
