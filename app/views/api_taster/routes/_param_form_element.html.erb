@@ -6,5 +6,6 @@
     <% else %>
         <input type="text" name="<%= label %>" value="<%= value.to_s %>"></input>
     <% end %>
+    <a class="btn btn-danger btn-mini" href="#" onclick="$(this).closest('.control-group').remove();"><i class="icon-minus icon-white"></i> Remove Parameter </a>
   </div>
 </div>
