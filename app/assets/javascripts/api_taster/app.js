@@ -113,8 +113,8 @@ jQuery(function($) {
 
   function onSubmit(e) {
     $form = $(e.target);
+    //Update the :blah stuff in the uri
     $form.attr("action", ApiTaster.getSubmitUrl($form));
-
 
     ApiTaster.disableSubmitButton();
     ApiTaster.disableUrlParams();
@@ -124,6 +124,9 @@ jQuery(function($) {
     });
     ApiTaster.lastRequest = {};
     ApiTaster.lastRequest.startTime = Date.now();
+
+    //Clear JSON Window.
+    $("#show-api-response-div").showNavTab("json").text("");
   }
 
   function onComplete(xhr, status) {
