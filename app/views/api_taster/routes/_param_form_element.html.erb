@@ -1,22 +1,29 @@
 <div class="control-group">
   <label class="control-label" for="<%= label %>"><%= defined?(label_text) ? label_text : label %></label>
   <div class="controls">
+    <div class="input-append">
+
     <%=
+      # This is ugly but make the js work on this page :)
+      id = label.gsub(/\[|\]/, '_')
+      attr_hash = { :class => 'dataInput', :id => id }
       case value
+        when Proc
+          Proc.call
         when :file
           file_field_tag label
         when :textarea
           text_area_tag label
         when :password
-          password_field_tag label
+          password_field_tag label, "", attr_hash
         else
-          text_field_tag label, value.to_s
+          text_field_tag label, value.to_s, attr_hash
       end
     %>
-
-    <div class="btn-group" style='margin-right:10px;'>
-      <div class='btn btn-danger btn-mini' onclick="$(this).closest('.control-group').remove();">Remove Parameter</div>
-      <div class='btn btn-danger btn-mini'> <i class='icon-white icon-trash'>&nbsp;</i></div>
+    <% if ![:textarea, :file].include?(value) %>
+      <div class="btn btn" data-toggle="tooltip" onmouseover="$(this).tooltip('toggle')" data-original-title="Erase field contents" onclick="$('#<%= id %>').val('')"><i class='icon icon-ban-circle'>&nbsp;</i></div>
+      <div class='btn btn-danger' data-toggle="tooltip" onmouseover="$(this).tooltip('toggle')" data-original-title="Remove field from form" onclick="$(this).closest('.control-group').remove();"> <i class='icon-white icon-trash'>&nbsp;</i></div>
+    <% end %>
     </div>
   </div>
 </div>
