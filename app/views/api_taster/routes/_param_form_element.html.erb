@@ -1,11 +1,18 @@
 <div class="control-group">
   <label class="control-label" for="<%= label %>"><%= defined?(label_text) ? label_text : label %></label>
   <div class="controls">
-    <% if value === :file %>
-        <%= file_field_tag label %>
-    <% else %>
-        <input type="text" name="<%= label %>" value="<%= value.to_s %>"></input>
-    <% end %>
+    <%=
+      case value
+        when :file
+          file_field_tag label
+        when :textarea
+          text_area_tag label
+        when :password
+          password_field_tag label
+        else
+          text_field_tag label, value.to_s
+      end
+    %>
     <a class="btn btn-danger btn-mini" href="#" onclick="$(this).closest('.control-group').remove();"><i class="icon-minus icon-white"></i> Remove Parameter </a>
   </div>
 </div>
