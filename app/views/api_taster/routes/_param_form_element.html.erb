@@ -13,6 +13,10 @@
           text_field_tag label, value.to_s
       end
     %>
-    <a class="btn btn-danger btn-mini" href="#" onclick="$(this).closest('.control-group').remove();"><i class="icon-minus icon-white"></i> Remove Parameter </a>
+
+    <div class="btn-group" style='margin-right:10px;'>
+      <div class='btn btn-danger btn-mini' onclick="$(this).closest('.control-group').remove();">Remove Parameter</div>
+      <div class='btn btn-danger btn-mini'> <i class='icon-white icon-trash'>&nbsp;</i></div>
+    </div>
   </div>
 </div>

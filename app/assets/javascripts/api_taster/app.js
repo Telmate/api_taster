@@ -149,6 +149,9 @@ jQuery(function($) {
           JSON.stringify(JSON.parse(xhr.responseText), null, 2)
         );
         break;
+      default:
+        $("#show-api-response-div").showNavTab("json").text("");
+        break;
     }
 
     $("#show-api-response-div pre[ref=response-raw]").text(xhr.responseText);
