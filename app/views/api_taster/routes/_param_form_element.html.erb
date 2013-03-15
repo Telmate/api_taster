@@ -6,10 +6,14 @@
     <%=
       # This is ugly but make the js work on this page :)
       id = label.gsub(/\[|\]/, '_')
-      attr_hash = { :class => 'dataInput', :id => id }
+      attr_hash = { :class => 'dataInput', :id => id, :field_name =>  label}
       case value
         when Proc
           instance_exec attr_hash, &value
+        when :datetime
+          text_field_tag label, Time.now.to_s(:db), attr_hash
+        when :date
+          text_field_tag label, Date.current.strftime("%Y-%m-%d"), attr_hash
         when :file
           file_field_tag label
         when :textarea
