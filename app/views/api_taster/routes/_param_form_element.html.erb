@@ -9,7 +9,7 @@
       attr_hash = { :class => 'dataInput', :id => id }
       case value
         when Proc
-          value.call(attr_hash)
+          instance_exec attr_hash, &value
         when :file
           file_field_tag label
         when :textarea
