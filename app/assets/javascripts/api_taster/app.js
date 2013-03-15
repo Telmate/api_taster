@@ -1,5 +1,13 @@
 var ApiTaster = {
 
+  toggleInput: function(btn) {
+    var disabled = $(btn).siblings('input').prop('disabled');
+    $(btn).siblings('input').prop('disabled', !disabled);
+    $(btn).children('i').toggleClass('icon-plus',  !disabled);
+    $(btn).children('i').toggleClass('icon-minus', disabled);
+    $(btn).toggleClass('btn-success', !disabled);
+  },
+
   disableSubmitButton: function() {
     $("#submit-api").attr("disabled", true);
   },

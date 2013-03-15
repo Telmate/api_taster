@@ -21,8 +21,8 @@
       end
     %>
     <% if ![:textarea, :file].include?(value) %>
-      <div class="btn btn" data-toggle="tooltip" onmouseover="$(this).tooltip('toggle')" data-original-title="Erase field contents" onclick="$('#<%= id %>').val('')"><i class='icon icon-ban-circle'>&nbsp;</i></div>
-      <div class='btn btn-danger' data-toggle="tooltip" onmouseover="$(this).tooltip('toggle')" data-original-title="Remove field from form" onclick="$(this).closest('.control-group').remove();"> <i class='icon-white icon-trash'>&nbsp;</i></div>
+      <div class="btn btn" data-toggle="tooltip" onmouseover="$(this).tooltip('show')" onmouseout="$(this).tooltip('hide')" data-original-title="Erase field contents" onclick="$('#<%= id %>').val('')"><i class='icon icon-ban-circle'></i></div>
+      <div class='btn btn-danger' data-toggle="tooltip" onmouseover="$(this).tooltip('toggle')" data-original-title="Remove field from form" onclick="ApiTaster.toggleInput(this)"><i class='icon-white icon-minus'></i></div>
     <% end %>
     </div>
   </div>
