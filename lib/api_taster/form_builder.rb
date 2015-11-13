@@ -1,6 +1,7 @@
 module ApiTaster
   class FormBuilder < AbstractController::Base
     include AbstractController::Rendering
+    include ActionView::Layouts
     include ActionView::Context
     include ActionView::Helpers::CaptureHelper
 
@@ -66,6 +67,16 @@ module ApiTaster
 
     def print_labels(parent_labels)
       "#{parent_labels * ''}"
+    end
+
+    # Removed from Rails action_view but a dependency for gems like api_taster
+    # lib/action_view/helpers/capture_helper.rb
+    def flush_output_buffer #:nodoc:
+      if output_buffer && !output_buffer.empty?
+        response.stream.write output_buffer
+        self.output_buffer = output_buffer.respond_to?(:clone_empty) ? output_buffer.clone_empty : output_buffer[0, 0]
+        nil
+      end
     end
   end
 end
