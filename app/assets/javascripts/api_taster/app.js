@@ -49,7 +49,7 @@ var ApiTaster = {
       baseUrl = $form.attr('action');
       $form.attr('origAction', baseUrl);
     }
-    var matches = baseUrl.match(/\:[^\/]+/g)
+    var matches = baseUrl.match(/[\:\*][^\/]+/g)
 
     if (matches) {
       for(var a = 0; a < matches.length; a++) {
